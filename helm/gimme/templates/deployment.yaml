@@ -42,12 +42,6 @@ spec:
           - name: GIMME_ALLOWED_GSUITE_DOMAINS
             value: {{ .Values.env.allowed_gsuite_domains }}
 
-          - name: GIMME_ALLOWED_GSUITE_PROJECTS
-            value: {{ .Values.env.allowed_gsuite_projects }}
-
-          - name: GIMME_ALLOWED_GSUITE_PRODUCTS
-            value: {{ .Values.env.allowed_gsuite_products }}
-
           - name: FLASK_ENV
             value: {{ .Values.env.flask_env | default "development"}}
 
@@ -66,8 +60,8 @@ spec:
                 name: {{ .Values.google_oauth_secret_name }}
                 key: GOOGLE_OAUTH_CLIENT_SECRET
 
-          {{- if .Values.controller.extraEnvs }}
-{{ toYaml .Values.extraEnvs | indent 12 }}
+          {{- if .Values.extraEnvs }}
+{{ toYaml .Values.extraEnvs | indent 10 }}
           {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
