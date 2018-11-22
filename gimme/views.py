@@ -48,6 +48,9 @@ def index():
         form=form,
     )
 
+@ui.route("/healtz", methods=["GET"])
+def healthcheck():
+    return 'running'
 
 @ui.route('/logout', methods=['GET'])
 def logout():

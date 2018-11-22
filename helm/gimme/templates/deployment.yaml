@@ -25,28 +25,28 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 5000
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthcheck
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthcheck
               port: http
           env:
           - name: GIMME_ENV
-            value: {{ .Values.env.gimme_env | default "dev" }}
+            value: {{ .Values.env.GIMME_ENV | default "dev" }}
 
           - name: GIMME_ALLOWED_GSUITE_DOMAINS
-            value: {{ .Values.env.allowed_gsuite_domains }}
+            value: {{ .Values.env.GIMME_ALLOWED_GSUITE_DOMAINS }}
 
           - name: FLASK_ENV
-            value: {{ .Values.env.flask_env | default "development"}}
+            value: {{ .Values.env.FLASK_ENV | default "development"}}
 
           - name: FLASK_APP
-            value: {{ .Values.env.flask_app | default "autoapp.py" }}
+            value: {{ .Values.env.FLASK_APP | default "autoapp.py" }}
 
           - name: GOOGLE_OAUTH_CLIENT_ID
             valueFrom:
