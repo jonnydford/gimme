@@ -30,6 +30,8 @@ class RequestForm(FlaskForm):
         choices=[
             ('roles/storage.admin',
              'Administrative access to Cloud Storage'),
+            ('roles/storage.objectAdmin', 
+             'Administrative access to Cloud Storage Objects'),
             ('roles/compute.instanceAdmin',
              'Administrative access to Compute Engine'),
             ('roles/bigquery.admin',
@@ -37,6 +39,13 @@ class RequestForm(FlaskForm):
             ('roles/container.admin',
              ('Administrative access to Kubernetes and '
               'the Kubernetes API')),
+            ('roles/resourcemanager.projectIamAdmin',
+             'Administrative access to IAM'),
+            ('roles/file.editor', 'Read/write access to Filestore'),
+            ('roles/cloudsql.admin', 
+             'Administrative access to Cloud SQL'),
+            ('roles/pubsub.admin',
+             'Administrative access to Pub/Sub'),
         ],
         validators=[validators.DataRequired()])
 
@@ -59,6 +68,17 @@ class RequestForm(FlaskForm):
         coerce=int,
         validators=[validators.DataRequired()])
 
+    user_group_or_service = fields.SelectField(
+        label="user, group, service",
+        description="Does permission need to be granted to a user, group or service account",
+        choices=[
+            ("user", "User"),
+            ("group", "Group"),
+            ("serviceAccount", "Service Account")
+        ],
+        validators=[validators.DataRequired()],
+    )
+    
     target = fields.StringField(
         label='target',
         description='who will be granted the permissions',
