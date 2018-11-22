@@ -117,9 +117,9 @@ def add_conditional_binding(google, form):
     if project == '':
         flash('Could not find project ID in provided URL', 'error')
         return
-    set_condition(google, form, project, 'user')
+    set_condition(google, form, project)
 
-def set_condition(google, form, project, user_or_group):
+def set_condition(google, form, project):
     url = '{}/{}:getIamPolicy'.format(CLOUD_RM, project)
     cur_policy = google.post(url)
     if cur_policy.status_code != 200:
@@ -135,7 +135,7 @@ def set_condition(google, form, project, user_or_group):
             'expression': 'request.time < timestamp("{}")'.format(expiry),
             'description': 'This is a temporary grant created by Gimme',
             'title': 'granted by {}'.format(session['account'])},
-        'members': ['{}:{}@{}'.format(user_or_group, form.target.data,
+        'members': ['{}:{}@{}'.format(form.user_group_or_service.data, form.target.data,
                                         form.domain.data)],
         'role': form.access.data})
     url = '{}/{}:setIamPolicy'.format(CLOUD_RM, project)
