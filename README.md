@@ -90,7 +90,10 @@ Other important variables are:
 
 You can get those from the API & Services menu in the Google Cloud Console once
 you've set up an OAuth consent screen. You'll need to go to Credentials > Create
-Credentials > OAuth Client ID.
+Credentials > OAuth Client ID > Web Application.
+
+Authorised JavaScript origins: https://yoururl.com
+Authorised redirect URIs: https://yoururl.com/login/google/authorized
 
 And when developing locally:
 
