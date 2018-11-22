@@ -26,6 +26,7 @@
         {{render_select_field("For a period of", form.period)}}
         {{render_input_field("On project", form.project)}}
         <div class="mui-form--inline">
+            {{render_select_field("User or Group", form.user_group_or_service, show_label=false)}}
             {{render_input_field("To", form.target)}}
             {{render_select_field("In domain", form.domain, show_label=false)}}
         </div>
