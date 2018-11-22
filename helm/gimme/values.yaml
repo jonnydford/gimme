@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: gimme
   tag: stable
   pullPolicy: IfNotPresent
 
@@ -23,26 +23,29 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - chart-example.local
+    - gimme.local
   tls: []
-  #  - secretName: chart-example-tls
+  #  - secretName: gimme-tls
   #    hosts:
-  #      - chart-example.local
+  #      - gimme.local
 
 # We specify the secret name to keep your Oauth secrets out of Source Control.
 # To create your secret:
-# kubectl create secret generic $secretname --from-literal=GOOGLE_OAUTH_CLIENT_ID=clientid --from-literal=GOOGLE_OAUTH_CLIENT_SECRET=clientsecret
-google_oauth_secret_name:
+# kubectl create secret generic gimmeoauth --from-literal=GOOGLE_OAUTH_CLIENT_ID=clientid --from-literal=GOOGLE_OAUTH_CLIENT_SECRET=clientsecret
+google_oauth_secret_name: gimmeoauth
 
 env:
-  # GIMME_ENV:
-  # GIMME_ALLOWED_GSUITE_DOMAINS:
-  # GIMME_ALLOWED_GSUITE_PROJECTS:
-  # GIMME_ALLOWED_GSUITE_PRODUCTS:
-  # FLASK_ENV:
-  # FLASK_APP:
+  GIMME_ENV:
+  GIMME_ALLOWED_GSUITE_DOMAINS:
+  FLASK_ENV:
+  FLASK_APP:
 
 extraEnvs: []
+# extraEnvs:
+#   - name: OAUTHLIB_RELAX_TOKEN_SCOPE
+#     value: 1
+#   - name: OAUTHLIB_INSECURE_TRANSPORT
+#     value: 1
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
